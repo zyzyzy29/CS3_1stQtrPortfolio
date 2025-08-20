@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Second Graded Exercise</title>
+    <script>
+        function totalMeal() {
+            // Get input values and convert them to floats
+            let mp = parseFloat(document.getElementById("mealPrice").value);
+            let tip = parseFloat(document.getElementById("tip").value);
+            let sc = parseFloat(document.getElementById("serviceCharge").value);
+
+            // Calculate total cost
+            let totalCost = mp + tip + (sc / 100 * mp);
+
+            // Round to two decimal places and display
+            document.getElementById("result").innerText = "Total Meal: " + totalCost.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+    <h2>Q1 3rd Graded Exercise submitted by Zyrene Abalos of 9-Sodium :D </h2>
+
+    <label for="mealPrice">Meal Price:</label>
+    <input type="text" id="mealPrice" value="119.00"><br><br>
+
+    <label for="tip">Tip:</label>
+    <input type="text" id="tip" value="20"><br><br>
+
+    <label for="serviceCharge"> Service Charge:</label>
+    <input type="text" id="serviceCharge" value="12"><br><br>
+
+    <button onclick="totalMeal()">Accept Input</button>
+
+    <p id="result">Total Meal: </p>
+</body>
+</html>
