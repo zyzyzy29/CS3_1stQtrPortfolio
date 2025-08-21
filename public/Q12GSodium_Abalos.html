@@ -5,15 +5,15 @@
     <title>Second Graded Exercise</title>
     <script>
         function totalMeal() {
-            // Get input values and convert them to floats
+            
             let mp = parseFloat(document.getElementById("mealPrice").value);
             let tip = parseFloat(document.getElementById("tip").value);
             let sc = parseFloat(document.getElementById("serviceCharge").value);
 
-            // Calculate total cost
+            
             let totalCost = mp + tip + (sc / 100 * mp);
 
-            // Round to two decimal places and display
+            
             document.getElementById("result").innerText = "Total Meal: " + totalCost.toFixed(2);
         }
     </script>
