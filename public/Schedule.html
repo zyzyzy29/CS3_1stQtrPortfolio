@@ -1,54 +1,186 @@
-<h1>Friday Schedule! </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilo & Stitch Friday Schedule</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+     
+        body {
+            background-color: #092140; 
+            color: #E5F0F7; 
+            font-family: 'Inter', sans-serif;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-<table>
-    <tr>
-        <th>time</th>
-        <th>subject</th>
-    </tr>
-    <tr> 
-        <td> 7 30 - 8 15</td>
-        <td rowspan = "2"> Biology</td>
-    </tr>
-    <tr> 
-        <td> 8 15 - 9 00</td>
-    </tr>
-    <tr>
-        <td>9:10 -9:55</td>
-        <td>Filipino</td>
-    </tr>
-    <tr>
-        <td>9:55 - 10:40 </td>
-        <td>Statistics</td>
-    </tr>
-    <tr>
-        <td>10:40 - 11:25 </td>
-        <td>Study Period</td>
-    </tr>
-    <tr>
-        <td>11:25 - 12:10 </td>
-        <td>Values Education</td>
-    </tr>
-    <tr>
-        <td>12:10 - 1:05</td>
-        <td>Lunch</td>
-    </tr>
-    <tr>
-        <td>1:05 - 1:50</td>
-        <td>Study Period</td>
-    </tr>
-    <tr>
-        <td>1:50 - 2:35</td> 
-        <td>Chemistry</td>
-    </tr>
-    <tr>
-        <td>2:45-3:30</td>
-        <td rowspan ="2">PE</td>
-    </tr>
-    <tr>
-        <td>3:30 - 4:15 </td>
-    </tr>
-</table>
+    
+        h1 {
+            font-family: 'Pacifico', cursive; 
+            color:#E54B4B; 
+            text-shadow: 2px 2px #0A3D62; 
+        }
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/IxX_QHay02M?si=ITLQ1rL5psFw7eCT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<img  src = "https://pyramidinternational.com/cdn/shop/collections/stitchcol_large.png?v=1737023154">
-`
+       
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            max-width: 650px;
+            margin: 2.5rem auto;
+            background-color: rgba(255, 255, 255, 0.1); 
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 4px solid #E54B4B; 
+        }
+
+        th, td {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 14px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #E54B4B; 
+            color: #F0F7F9;
+            font-weight: 700;
+        }
+
+    
+        td:nth-child(2):contains("Lunch"),
+        td:nth-child(2):contains("Study Period") {
+            background-color: rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+        }
+
+        
+        .nav-links a {
+            color: #FFEE93; 
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+       
+        .content-block {
+            width: 100%;
+            max-width: 560px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; 
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 4px solid #FFEE93; 
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border: 4px solid #FFEE93; 
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <div class="w-full max-w-6xl">
+        <h1 class="text-7xl md:text-8xl text-center mb-10 mt-6">Friday Schedule!</h1>
+        <p class="text-xl text-center mb-8">Na01 ABALOS, Zyrene - October 14 2025</p>
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>Subject</th>
+            </tr>
+            <tr> 
+                <td>7:30 - 8:15</td>
+                <td rowspan="2">Biology</td>
+            </tr>
+            <tr> 
+                <td>8:15 - 9:00</td>
+            </tr>
+            <tr>
+                <td>9:10 - 9:55</td>
+                <td>Filipino</td>
+            </tr>
+            <tr>
+                <td>9:55 - 10:40</td>
+                <td>Statistics</td>
+            </tr>
+            <tr>
+                <td>10:40 - 11:25</td>
+                <td>Study Period</td>
+            </tr>
+            <tr>
+                <td>11:25 - 12:10</td>
+                <td>Values Education</td>
+            </tr>
+            <tr>
+                <td>12:10 - 1:05</td>
+                <td>Lunch</td>
+            </tr>
+            <tr>
+                <td>1:05 - 1:50</td>
+                <td>Study Period</td>
+            </tr>
+            <tr>
+                <td>1:50 - 2:35</td> 
+                <td>Chemistry</td>
+            </tr>
+            <tr>
+                <td>2:45 - 3:30</td>
+                <td rowspan="2">PE</td>
+            </tr>
+            <tr>
+                <td>3:30 - 4:15</td>
+            </tr>
+        </table>
+
+        <div class="content-block">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/W-QGMqCVqPA?si=Tc1khC7Ru1aVno3A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            
+            <img src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2021/01/Lilo-Stitch-1-Cropped.jpg" alt="Lilo and Stitch standing together on the beach.">
+        </div>
+
+     
+        <p class="text-xl my-8 text-center max-w-2xl mx-auto">I picked friday because its my favorite day. It has study period after lunch and PE. I picked the image because I love Lilo & Stitch</p>
+
+        <div class="nav-links my-8 text-center">
+            <span class="font-semibold mr-4 text-white">Other Schedules:</span>
+            <a href="https://orb-patatas.github.io/CS3_1stQtrPortfolio/public/2Q1gSodiumCandelaria.html">Monday</a>
+            <a href="https://noyamlv.github.io/CS3_1stQtrPortfolio_SodiumRATIO/public/2Q1GSodiumRatio.html">Tuesday</a>
+            <a href="https://nhojyel.github.io/CS3_1stQtrPortfolio/public/2Q1GSodiumLuis.html">Thursday</a>
+        </div>
+    </div>
+</body>
+</html>
