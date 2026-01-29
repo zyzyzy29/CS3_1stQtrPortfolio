@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Signups</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #fff; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background-color: #000080; color: white; padding: 10px; text-align: left; }
+        td { border: 1px solid #ccc; padding: 8px; font-size: 14px; }
+        .filter-section { margin: 20px 0; }
+        .back-link { color: blue; text-decoration: underline; cursor: pointer; }
+        .no-data { border: 1px solid #ccc; padding: 10px; text-align: center; color: #555; }
+    </style>
+</head>
+<body>
+    <h1>Show List of Students Who Signed-Up</h1>
+    <p><strong>by [Your Name]</strong></p>
+    
+    <a href="Q3_2GSodiumAbalos.html" class="back-link">Back to Signup</a>
+
+    <div class="filter-section">
+        <label>Select Your Club: </label>
+        <select id="clubFilter" onchange="displayData()">
+            <option value="ALL">-- select an option --</option>
+            <option value="Math Club">Math Club</option>
+            <option value="Model United Nations">Model United Nations</option>
+            <option value="Alianti">Alianti</option>
+            <option value="Labuyo">Labuyo</option>
+            <option value="Pisay XYZ">Pisay XYZ</option>
+        </select>
+    </div>
+
+    <p id="totalCount">Total Signup : 0</p>
+
+    <div id="tableContainer">
+        </div>
+
+    <script>
+        function displayData() {
+            const filterValue = document.getElementById('clubFilter').value;
+            const container = document.getElementById('tableContainer');
+            const totalText = document.getElementById('totalCount');
+            const rawData = localStorage.getItem('clubSignups');
+            if (!rawData) {
+                container.innerHTML = "<p class='no-data'>No data found in local storage.</p>";
+                totalText.innerText = "Total Signup : 0";
+                return;
+            }
+            let signups = JSON.parse(rawData);
+            if (filterValue !== "ALL") {
+                signups = signups.filter(s => s.club === filterValue);
+            }
+            if (signups.length === 0) {
+                container.innerHTML = "<div class='no-data'>No Sign Ups for the club</div>";
+                totalText.innerText = `Total Signup : 0`;
+                return;
+            }
+            let html = `<table>
+                <tr>
+                    <th>Club</th>
+                    <th>ID</th>
+                    <th>Fullname</th>
+                    <th>Grade</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Intern|Extern</th>
+                </tr>`;
+            signups.forEach(item => {
+                html += `<tr>
+                    <td>${item.club}</td>
+                    <td>${item.studentID}</td>
+                    <td>${item.fullName}</td>
+                    <td>${item.gradeLevel}</td>
+                    <td>${item.email}</td>
+                    <td>${item.mobile}</td>
+                    <td>${item.status}</td>
+                </tr>`;
+            });
+            html += `</table>`;
+            container.innerHTML = html;
+            totalText.innerText = `Total Signup : ${signups.length}`;
+        }
+        window.onload = displayData;
+    </script>
+</body>
+</html>

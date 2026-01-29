@@ -5,66 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Club Application Form</title>
     <style>
-        body { font-family: sans-serif; background-color: #f4f7f6; padding: 20px; }
-        form { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        body { font-family: sans-serif; background-color: #ffe8c8; padding: 20px; }
+        form { max-width: 600px; margin: auto; background: rgb(195, 218, 250); padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         fieldset { border: 1px solid #ddd; border-radius: 5px; margin-bottom: 20px; padding: 15px; }
         legend { font-weight: bold; color: #333; }
         label { display: block; margin-bottom: 15px; font-weight: 500; }
         input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #4A90E2;
-            box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
-            background-color: #f0f7ff;
-        }
         .error-field { border: 2px solid #ff4d4d; background-color: #fff2f2; }
         .btn-container { text-align: center; }
-        button { padding: 10px 20px; margin: 10px; cursor: pointer; border: none; border-radius: 4px; }
+        button { padding: 10px 20px; margin: 10px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; }
         .submit-btn { background-color: #28a745; color: white; }
         .reset-btn { background-color: #dc3545; color: white; }
+        .view-btn { background-color: #4A90E2; color: white; text-decoration: none; display: inline-block; padding: 10px 20px; border-radius: 4px; }
     </style>
 </head>
 <body>
-    <form action="submit" method="post" onsubmit="return confirmAction('submit')" onreset="return confirmAction('reset')">
+    <form id="clubForm" onsubmit="return handleFormSubmit(event)" onreset="return confirmAction('reset')">
         <fieldset>
             <legend>Personal Information</legend>
-            <label>Student ID: 
-                <input type="number" name="studentID" required onblur="checkEmpty(this)">
-            </label>
-            <label>Full Name: 
-                <input type="text" name="fullName" required onblur="checkEmpty(this)">
-            </label>
-            <label>Birthday: 
-                <input type="date" name="birthday" required onblur="checkEmpty(this)">
-            </label>
-            <label>Email Address: 
-                <input type="email" name="email" required onblur="checkEmpty(this)">
-            </label>
+            <label>Student ID: <input type="number" name="studentID" required onblur="checkEmpty(this)"></label>
+            <label>Full Name: <input type="text" name="fullName" required onblur="checkEmpty(this)"></label>
+            <label>Birthday: <input type="date" name="birthday" required onblur="checkEmpty(this)"></label>
+            <label>Email Address: <input type="email" name="email" required onblur="checkEmpty(this)"></label>
         </fieldset>
         <fieldset>
             <legend>Membership Details</legend>
-            <label>Mobile Phone: 
-                <input type="text" name="mobile" required onblur="checkEmpty(this)">
-            </label>
+            <label>Mobile Phone: <input type="text" name="mobile" required onblur="checkEmpty(this)"></label>
             <label>Grade Level: 
                 <select name="gradeLevel" required>
                     <option value="">--Select Grade--</option>
-                    <option value="G7">Grade 7</option>
-                    <option value="G8">Grade 8</option>
-                    <option value="G9">Grade 9</option>
-                    <option value="G10">Grade 10</option>
+                    <option value="Grade 7">Grade 7</option>
+                    <option value="Grade 8">Grade 8</option>
+                    <option value="Grade 9">Grade 9</option>
+                    <option value="Grade 10">Grade 10</option>
                 </select>
             </label>
-            <label>Student Status: 
-                <br>
-                <input type="radio" name="status" value="INT" required style="width: auto;"> Intern
-                <input type="radio" name="status" value="EXT" required style="width: auto;"> Extern
+            <label>Student Status: <br>
+                <input type="radio" name="status" value="Intern" required style="width: auto;"> Intern
+                <input type="radio" name="status" value="Extern" required style="width: auto;"> Extern
             </label>
             <label>Preferred Organization: 
-                <select name="club" required>
+                <select name="club" id="clubSelect" required>
                     <option value="">--pick a club!--</option>
                     <option value="Math Club">Math Club</option>
-                    <option value="MUN">Model United Nations</option>
+                    <option value="Model United Nations">Model United Nations</option>
                     <option value="Alianti">Alianti</option>
                     <option value="Labuyo">Labuyo</option>
                     <option value="Pisay XYZ">Pisay XYZ</option>
@@ -77,10 +61,10 @@
         <div class="btn-container">
             <button type="submit" class="submit-btn">Submit Application</button>
             <button type="reset" class="reset-btn">Reset Form</button>
+            <a href="viewSignUps.html" class="view-btn">View Signups</a>
         </div>
     </form>
     <script>
-        
         function checkEmpty(element) {
             if (element.value.trim() === "") {
                 element.classList.add("error-field");
@@ -93,6 +77,19 @@
                 ? "Are you sure you want to submit your application?" 
                 : "Are you sure you want to clear all fields?";
             return confirm(message);
+        }
+        function handleFormSubmit(event) {
+            event.preventDefault(); 
+            if (!confirmAction('submit')) return false;
+            const formData = new FormData(event.target);
+            const signupData = Object.fromEntries(formData.entries());
+            let existingSignups = localStorage.getItem('clubSignups');
+            let signupList = existingSignups ? JSON.parse(existingSignups) : [];
+            signupList.push(signupData);
+            localStorage.setItem('clubSignups', JSON.stringify(signupList));
+            alert("Signup saved successfully!");
+            event.target.reset(); 
+            return false;
         }
     </script>
 </body>
