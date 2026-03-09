@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Portfolio</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; background-color: #380000; }
-        .container { background: rgb(246, 245, 245); padding: 20px; border-radius: 8px; width: 400px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        body { font-family: sans-serif; display: flex; justify-content: center; background-color: #380000; padding-top: 20px; }
+        .container { background: rgb(246, 245, 245); padding: 20px; border-radius: 8px; width: 450px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
         .form-group { text-align: left; margin-bottom: 15px; }
         label { display: block; font-weight: bold; margin-bottom: 5px; }
         input, select { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
@@ -14,17 +14,20 @@
         .stars { font-size: 25px; cursor: pointer; color: #ccc; }
         .stars .yellow { color: #ffcc00; }
         
-        button { width: 100%; padding: 10px; background-color: #4285f4; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        button#addMovieBtn { width: 100%; padding: 10px; background-color: #4285f4; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 10px; }
         
         .movie-list { margin-top: 20px; text-align: left; }
-        .movie-item { background: #fffdf0; border: 1px solid #ddd; padding: 10px; margin-bottom: 5px; border-radius: 4px; font-size: 14px; display: flex; align-items: center; justify-content: space-between; }
-        .list-stars { color: #ffcc00; margin-left: 5px; }
+        .movie-item { background: #fffdf0; border: 1px solid #ddd; padding: 10px; margin-bottom: 8px; border-radius: 4px; font-size: 14px; display: flex; align-items: center; justify-content: space-between; }
+        .list-stars { color: #ffcc00; }
+
+        .delete-btn { background: #fff; border: 1px solid #999; padding: 4px 8px; cursor: pointer; border-radius: 4px; font-size: 12px; }
+        .delete-btn:hover { background: #f0f0f0; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Add a Movie!!!!</h2>
+    <h2>Add / Update a Movie Rating</h2>
     
     <div class="form-group">
         <label>Title:</label>
@@ -43,7 +46,7 @@
             <option value="Comedy">Comedy</option>
             <option value="Drama">Drama</option>
             <option value="Sci-Fi">Sci-Fi</option>
-            <option value="Romantinc Comedy">Romantic Comedy</option>
+            <option value="Romantic Comedy">Romantic Comedy</option>
             <option value="Horror">Horror</option>
             <option value="Thriller">Thriller</option>
         </select>
@@ -73,7 +76,7 @@
 
     stars.forEach(star => {
         star.onclick = function() {
-            currentRating = this.getAttribute('data-value');
+            currentRating = parseInt(this.getAttribute('data-value'));
             updateStars(currentRating);
         }
     });
@@ -84,24 +87,38 @@
         });
     }
 
- 
     document.getElementById('addMovieBtn').onclick = function() {
-        const title = document.getElementById('movieTitle').value;
-        const year = document.getElementById('movieYear').value;
-        const genre = document.getElementById('movieGenre').value;
+        const titleInput = document.getElementById('movieTitle').value.trim();
+        const yearInput = document.getElementById('movieYear').value.trim();
+        const genreInput = document.getElementById('movieGenre').value;
 
-        if(!title || !year || currentRating === 0) return alert("Please fill all fields");
+        if(!titleInput || !yearInput || currentRating === 0) return alert("Please fill all fields");
 
-        const newMovie = { title, year, genre, rating: currentRating };
+        let movies = JSON.parse(localStorage.getItem('movies') || "[]");
 
-  
-        const movies = JSON.parse(localStorage.getItem('movies') || "[]");
-        movies.push(newMovie);
+        const existingIndex = movies.findIndex(m => m.title.toLowerCase() === titleInput.toLowerCase());
+
+        if (existingIndex !== -1) {
+            const existingMovie = movies[existingIndex];
+
+            const newAverage = (parseFloat(existingMovie.rating) + currentRating) / 2;
+            
+            movies[existingIndex].year = yearInput;
+            movies[existingIndex].genre = genreInput;
+            movies[existingIndex].rating = Math.round(newAverage); 
+        } else {
+
+            const newMovie = { 
+                title: titleInput, 
+                year: yearInput, 
+                genre: genreInput, 
+                rating: currentRating 
+            };
+            movies.push(newMovie);
+        }
         
-      
         localStorage.setItem('movies', JSON.stringify(movies));
 
-   
         document.getElementById('movieTitle').value = '';
         document.getElementById('movieYear').value = '';
         currentRating = 0;
@@ -109,15 +126,27 @@
         displayMovies();
     };
 
-   
+
+    function deleteMovie(index) {
+        if (confirm("Are you sure you want to delete?")) {
+            let movies = JSON.parse(localStorage.getItem('movies') || "[]");
+            movies.splice(index, 1); 
+            localStorage.setItem('movies', JSON.stringify(movies));
+            displayMovies();
+        }
+    }
+
     function displayMovies() {
         const listDiv = document.getElementById('movieListDisplay');
         const movies = JSON.parse(localStorage.getItem('movies') || "[]");
         
-        listDiv.innerHTML = movies.map(m => `
+        listDiv.innerHTML = movies.map((m, index) => `
             <div class="movie-item">
-                <span>${m.title} (${m.year}) - ${m.genre}, Rating: </span>
-                <span class="list-stars">${'★'.repeat(m.rating)}${'☆'.repeat(5-m.rating)}</span>
+                <div>
+                    <span>${m.title} (${m.year}) - ${m.genre}, Rating: </span>
+                    <span class="list-stars">${'★'.repeat(m.rating)}${'☆'.repeat(5-m.rating)}</span>
+                </div>
+                <button class="delete-btn" onclick="deleteMovie(${index})">Delete</button>
             </div>
         `).join('');
     }
