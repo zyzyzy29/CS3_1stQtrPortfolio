@@ -1,0 +1,11 @@
+1. Top, left, right and bottom have no effect on static. Relative positions the element using a basis of its original position. For example left 20 px would move the element 20 px from the left of its original position. 
+2. When you scroll the page, the footer stays fixed at the bottom. It behaves differently because in the case of position relative, we're only positioning it with basis of its original position. However, for the footer, we positioned it with a different value (in this case fixed). 
+3. position: absolute fixes the position of the element relative to its closest ancestor. For example if its closest to a fixed element, it would position based on the position of the fixed element. It's different from fixed because fixed gets positioned reagardless of its ancestor elements and it doesn't scroll with the page. 
+4. The z index gives the layering order of the elements. Since the notice was layer 2, it appeared on top of the content. If we were to switch the values, the content would appear on top of the notice. 
+5. To put the notice on the top right, you'd have to edit the values of its left or change it to right and edit the values. 
+6. Relative positioned the element based on its original position, fixed is relative to the browser's viewport. 
+7. When notice has a higher z index, it goes on top of content and vice versa. 
+8. a. Static positioning is the default and top, bottom, left right have no effect on it. Relative positions it based on its original position. Absolute positions it relative to its closest ancestor and fixed positions it relative to the viewport. 
+b. Absolute positioning depends on its parent element by referring to its closest ancesstor. 
+c. Fixed is position relative to the viewport whilst sticky is relative to its parent element. However, they both are at fixed position when you scroll. 
+d. For time sensitive information like a last minute venue change for an event, I would use the fixed property on an alert banner so it would be something they aren't able to miss when scrolling. 
