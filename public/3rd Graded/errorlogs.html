@@ -6,13 +6,11 @@
   <meta name="author" content="Anica Malang & Zy Abalos">
   <meta name="description" content="testing and debugging">
   <meta name="keywords" content="testing and debugging">
-  <title>CS3 </title>
+  <title>CS3 - Error Logs</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300&family=Roboto&display=swap" rel="stylesheet">
-  <!-- <link rel="icon" type="image/x-icon" href="images/favicon.ico"> -->
-
   <style>
     tr:nth-child(1) ~ tr:nth-child(odd) {
       background-color: lightgray;
@@ -20,10 +18,12 @@
     }
     td, th {
       padding: 10px;
+      border: 1px solid #333;
     }
     table {
       width: 90%;
-      margin: 0 auto;
+      margin: 80px auto 20px; 
+      border-collapse: collapse;
     }
     caption {
       font-size: 2em;
@@ -37,12 +37,12 @@
 <body>
   <header>
     <nav>
-      <a href="main.html#start">Table</a>
-      <a href="main.html#input">Input</a>
-      <a href="main.html#output">Output</a>
+      <a href="index.html#start">Table</a>
+      <a href="index.html#input">Input</a>
+      <a href="index.html#output">Output</a>
     </nav>
     
-    <h1 style="padding: 30px"> Anica Malang & Zy Abalos || Sodium - Mar 2026</h1>
+    <h1 style="padding: 30px; margin-top: 50px;"> Xandra J. Razonabe, Anica Malang & Zy Abalos || Section He - Mar 2026</h1>
   </header>
 
   <section id="table">
@@ -92,27 +92,27 @@
       </tr>
       <tr>
         <td> 7 </td> 
-        <td> </td> 
-        <td> </td>
-        <td> </td>
+        <td> CSS 21 </td> 
+        <td> Navigation bar scrolls with the page instead of staying at the top </td>
+        <td> Added position: fixed and top: 0 to the nav selector </td>
       </tr>
       <tr>
         <td> 8 </td> 
-        <td> </td> 
-        <td> </td>
-        <td> </td>
+        <td> JS 1 </td> 
+        <td> Function definition missing parameters to receive numbers from HTML </td>
+        <td> Added (x0_val, y0_val, x_val, y_val) to the function head </td>
       </tr>
       <tr>
         <td> 9 </td> 
-        <td> </td> 
-        <td> </td>
-        <td> </td>
+        <td> CSS 58 </td> 
+        <td> The .point class is missing position: absolute to allow movement </td>
+        <td> Added position: absolute to the .point class </td>
       </tr>
       <tr>
         <td> 10 </td> 
-        <td> </td> 
-        <td> </td>
-        <td> </td>
+        <td> JS 7 </td> 
+        <td> Math for point positioning was missing the 'style' keyword </td>
+        <td> Corrected property access to point.style.left and point.style.bottom </td>
       </tr>
      
     </table>
@@ -120,7 +120,6 @@
   </section>
   
    
-  <!--- anchors for socmed site are done with image sprites -->
   <footer>
     <a href="https://facebook.com"> 
     <div class="icon facebook"></div>
